@@ -165,4 +165,4 @@ class CatWindow(QLabel):
         self.update_animation()
 
     def move_window(self):
-        self.setGeometry(self.x, self.y(), self.width(), self.height())
+        self.setGeometry(self.x, self.y, self.width(), self.height())
