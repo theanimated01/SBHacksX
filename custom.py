@@ -106,7 +106,6 @@ class CustomizationWindow(QWidget):
         }
         if topic:
             self.topicEntered.emit()
-        print(f'Topic: {topic}, Netflix: {netflix}, YouTube: {youtube}, Social Media: {social_media}, Shopping: {shopping}')
 
 def get_user_pref():
     global user_pref
