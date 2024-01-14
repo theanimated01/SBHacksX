@@ -80,15 +80,12 @@ def get_chrome_info():
     osa_command = f"osascript -e '{apple_script}'"
     output = subprocess.check_output(osa_command, shell=True).decode('utf-8').strip()
     tab_title, tab_url = output.split(', ', 1)
-    print(tab_url)
     parsed_url = urlparse(tab_url)
     domain = parsed_url.netloc
     path = parsed_url.path
     query_string = parsed_url.query
     parsed_query = parse_qs(query_string)
     search_query = None
-    print("domain: " , domain)
-    print("parsed_url: ", parsed_url)
     if "google" in domain or "google" in path:
         # The search query parameter in Google Search URL is 'q'
         search_query = parsed_query.get('q')
@@ -101,13 +98,10 @@ def get_chrome_info():
     elif any(i in domain for i in study_list):
         search_query = "override"
     elif "netflix" in domain or "netflix" in path:
-        print("found")
         if (user_pref["Netflix"]):
             search_query = "override"
-            print("here", search_query)
         else:
             search_query = "restricted"
-            print("here", search_query)
     elif "instagram" in domain or "instagram" in path or "twitter" in domain or "twitter" in path or "facebook" in domain or "facebook" in path or "tiktok" in domain or "tiktok" in path or "pinterest" in domain or "pinterest" in path:
         if (user_pref["Social Media"]):
             search_query = "override"
@@ -149,12 +143,10 @@ def main_func():
                 for keyword in keywords:
                     if (keyword.salience > 0.6):
                         search +=  keyword.name
-                print(url_content, focus_topic)
                 focus_topic_vec = encode_text(focus_topic)
                 search_vec = encode_text(url_content)
 
                 similarity_score = cosine_similarity(focus_topic_vec, search_vec)
-                print(f"Similarity Score: {similarity_score}")
                 if (similarity_score < 0.4):
                     close_tab()
 
@@ -168,7 +160,7 @@ def main_func():
 if __name__ == "__main__":
 
     model = SentenceTransformer('all-MiniLM-L6-v2')
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/animesh/Documents/SBHacksX/sbhacks10-2bfb17f06a90.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'sbhacks10-2bfb17f06a90.json')
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     app = QApplication(sys.argv)

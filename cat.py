@@ -166,10 +166,3 @@ class CatWindow(QLabel):
 
     def move_window(self):
         self.setGeometry(self.x, self.y(), self.width(), self.height())
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = CatWindow()
-    window.show()
-    sys.exit(app.exec_())
