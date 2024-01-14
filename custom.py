@@ -1,44 +1,42 @@
-# Updated PyQt code snippet with additional options and a dividing line.
-
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QCheckBox, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QFrame, QSpinBox
+import os
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QCheckBox
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QPixmap
 
-#Global variables
+# Global variables
 quit_app = False
 user_pref = {}
 
 class CustomizationWindow(QWidget):
     topicEntered = pyqtSignal()
+
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle('Kitten Customization')
-        self.setGeometry(100, 100, 600, 200)  # Adjusted size of the window
+        self.setWindowTitle('Purrformance')
+        self.setGeometry(100, 100, 600, 400)  # Adjusted size of the window
 
         main_layout = QHBoxLayout()
-
+    
         # Left side layout
         left_layout = QVBoxLayout()
 
-        # Checkbox for "Attack Tab" option
-        # self.attack_tab_checkbox = QCheckBox('Allow Goose To Attack Tab', self)
-        # left_layout.addWidget(self.attack_tab_checkbox)
-
-        # Frame rate option
-        topic_label = QLabel('Topic That You Are Going To Be Working On:', self)
-        left_layout.addWidget(topic_label)
-
-        self.lineEdit = QLineEdit()
-        topic_box_layout = QVBoxLayout()
-        topic_box_layout.addWidget(self.lineEdit)
-        # self.frame_rate_spin_box.setRange(60, 90)  # Range for frame rate
-        left_layout.addLayout(topic_box_layout)
+        # Add stretch to push everything to center
+        left_layout.addStretch(1)
         
-        # Add left layout to main layout
-        main_layout.addLayout(left_layout)
+        # Create a QLabel for the image
+        image_label = QLabel(self)
+        # Load the image
+        pixmap = QPixmap(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'kitten_gif/idle.gif'))
+        image_label.setPixmap(pixmap)
+        # Optional: Resize the label to fit the image
+        image_label.resize(pixmap.width(), pixmap.height())
+
+        # Add the image label to the left layout
+        left_layout.addWidget(image_label)
 
         left_layout.addStretch(1)
 
@@ -47,14 +45,17 @@ class CustomizationWindow(QWidget):
         quit_button.clicked.connect(self.Quit)
         left_layout.addWidget(quit_button)
 
-        # Vertical line as a divider
-        divider = QFrame()
-        divider.setFrameShape(QFrame.VLine)
-        divider.setFrameShadow(QFrame.Sunken)
-        main_layout.addWidget(divider)
+        # Add left layout to main layout
+        main_layout.addLayout(left_layout)
 
-        # Right side layout (existing content)
+        # Right side layout
         right_layout = QVBoxLayout()
+
+        topic_label = QLabel('Topic That You Are Going To Be Working On:', self)
+        right_layout.addWidget(topic_label)
+
+        self.lineEdit = QLineEdit()
+        right_layout.addWidget(self.lineEdit)
 
         # Header label
         header_label = QLabel('Choose Websites For Studying', self)
@@ -87,27 +88,25 @@ class CustomizationWindow(QWidget):
     def Quit(self):
         global quit_app
         quit_app = True
-        QApplication.instance().quit()  # Quit the application
+        QApplication.instance().quit()
 
     def saveSettings(self):
-        # Logic to process and save the settings
         global user_pref
         topic = self.lineEdit.text()
         netflix = self.netflix_checkbox.isChecked()
         youtube = self.youtube_checkbox.isChecked()
         social_media = self.social_media_checkbox.isChecked()
         shopping = self.shopping_checkbox.isChecked()
-        user_pref = { 
-            "Topic": topic, 
-            "Netflix": netflix, 
+        user_pref = {
+            "Topic": topic,
+            "Netflix": netflix,
             "YouTube": youtube,
-            "Social Media": social_media, 
+            "Social Media": social_media,
             "Shopping": shopping
         }
         if topic:
             self.topicEntered.emit()
         print(f'Topic: {topic}, Netflix: {netflix}, YouTube: {youtube}, Social Media: {social_media}, Shopping: {shopping}')
-        # Add your logic to save these settings or perform actions based on these settings
 
 def get_user_pref():
     global user_pref
@@ -116,3 +115,8 @@ def get_user_pref():
 def get_quit_status():
     global quit_app
     return quit_app
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = CustomizationWindow()
+    sys.exit(app.exec_())
