@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sbhacks10",
+  "private_key_id": "2bfb17f06a9074e42782e26287cd05367a5dd2cf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCsVhwJqpdVXH6+\nfAXDOhrO+ghwZQ+sSsdJbCYI6NNFUeA5YVPjmKyoiTeTKyl9gRnDj08Delf0nbew\n8IVc6NL1p6pqv54wnOpjRCCT0QsTSJ/enAbK/ALurtyJW/DmJoHYpKsLL/P1m8mb\n63KnYPVE9Nqen79tSFKkl2G2f3Gz4U2nKVBZDBZgH0yXTtDzMaU2DCg7VsBc141x\nRTFi7mDCd/t7L0f9zjqzLIMt353RTWc3JU42Q+FVEg6SR5DzL5eBCfWJRyNyFCB3\nXYjoocbtE+uQ7bb2XRrbTZY0VeYK5PiCNhvw5TYdnLalNkC0tcStrBuHUSRo8H4L\nt26prRJBAgMBAAECggEAJXzVvISPRtJH/8eauUz6Z+ubylcxgZkCoMYVv/pler7E\nt7akOO4NINw4apsI+3QJ1rBlz6vdVii4vJSVbhB3U1iViYMFNi3sDovTSlQ+xIMX\nw6TNFXqcaK9A6eBGFspplGa9jkFwIA0zXedpmV9N+yIILFkzmuIQmB0V9Ezkvuv4\nDIu/a+uObZKYOjItdRIzDa7jHwPdCagM4QnBbfPUPb6XqLwisk0n0/drqbkl/r4A\nVnw4b/oL6XR8T9s5AF0dLOSV8TgozCd3z29tSthIzamn8kC6QSQ7Pl3hRPLK7knU\nm4p5H4ARv69NgogcWnLohCWGsX/stEbmMdcObUDCwQKBgQDhZUj0dybFkVxJ9bp3\nofVhAXlTxkAeJt8Xig3Hsd1hTQKlOxBhwqiADwpCdTg/KVYcoZs7nYVFtKEYoKtZ\ne4aif7+Kwff0Zctqk0DxpYMDfoAxV9pm1MGYotNPGwAx9L3NBWU3Jf7OiFe/pA8x\npfmmrOyPazkrOj0y05tda6TvpwKBgQDDvH4rMCLnMrrceb4o6vTdopTTohJlDoRE\nUkRMPzG2c679oARCxn/D0K54cLzscwccPtTLaQFW5Rpf4tJcUsYFM9O0OkU8L+gZ\nwO3RHasyOtDTSwVME0TNvQ33LIMaEJvE0ZdYsJbLkvO0UFnvHozxoRtLVkzfP5Zf\nv8XeBbtr1wKBgQC80rQ+kP87Lh6Jm0F+bYD6plh1FTWrzNbCipYmwFv84p4fvA5q\nR8APoAnxSPA5AbExRTWdyMXYco0u65MA4NoWkjztyrel2A2EmB4lEopiR/yu2bGO\nyhfxfh7WO4F7WFQVSLrVa5A+h7wzQQa1ih1OQ7neIG6BR0XzqZCTv9UqKwKBgDhw\nVGz9j0Lc9NZ34CYKQZras1EmrWkoO2k702es3Re/2ZhWGIRsmhCLTpN55m/DZyx0\nzYTtfS5iFy3IyGFImMKNRCD2oFoPcjxize/7Pw7XuLkEK73Y3ID6X1mDIzZTzaZ9\nzMcM/B4s/Epk1NnHFFrj2mvpsXa57hEjydkQDA+3AoGAbbIQp5qEl+5ykSymX7rL\nVm0mkXjVhH4fK3l0xap//vC6HyZgFP7KJHsBGzC2EezzY566+RHWb2oeFGvAh9kE\nx+ntTZEVyJrepQQ4qGSSxQH2ekU6j4+iLrTjHSU9XVUr1rPwBK94m4GjFPtLM4Uq\n4oCjRUrNVKpmgi80IHgeQlE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "productivity-tool-nlp@sbhacks10.iam.gserviceaccount.com",
+  "client_id": "101127178440319951813",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/productivity-tool-nlp%40sbhacks10.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
