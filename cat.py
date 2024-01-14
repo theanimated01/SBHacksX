@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QMovie
 from PyQt5.QtWidgets import QDesktopWidget
+from PyQt5.QtGui import QCursor
 
 # State constants
 IDLE = 0
@@ -18,8 +19,11 @@ class CatWindow(QLabel):
         super().__init__()
         self.current_state = IDLE
         self.state_duration = 0
+        self.enable_chase = True
         self.initUI()
         self.center_on_screen()
+        self.y_pos = 100
+        self.movement_speed = 10
 
         # Attributes for draggable window
         self.is_dragging = False
@@ -52,13 +56,44 @@ class CatWindow(QLabel):
             self.x = self.pos().x()  # Update the x-coordinate to the new position
             event.accept()
 
+    def chase_cursor(self):
+        self.timer.start(100)
+        cursor_pos = QCursor.pos()
+        screen_geometry = QDesktopWidget().screenGeometry()
+
+        # Calculate the direction to move (x and y)
+        x_direction = 1 if cursor_pos.x() > self.x else -1
+        y_direction = 1 if cursor_pos.y() > self.y_pos else -1
+
+        # Update state based on x direction
+        if cursor_pos.x() != self.x:
+            self.current_state = MOVING_NEGATIVE if x_direction == 1 else MOVING_POSITIVE
+            new_x = self.x + x_direction * self.movement_speed
+            self.x = max(0, min(screen_geometry.width() - self.width(), new_x))
+
+        # Update y position
+        if cursor_pos.y() != self.y_pos:
+            new_y_pos = self.y_pos + y_direction * self.movement_speed
+            self.y_pos = max(0, min(screen_geometry.height() - self.height(), new_y_pos))
+
+        # Move the window
+        self.move(self.x, self.y_pos)
+
+        # Check if the cat has reached the cursor
+        if abs(cursor_pos.x() - self.x) <= self.movement_speed and abs(cursor_pos.y() - self.y_pos) <= self.movement_speed:
+            self.current_state = IDLE  # Cat has reached the cursor
+            self.enable_chase = False
+            self.timer.start(800)
+
+        self.update_animation()
+    
     def initUI(self):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.update_animation()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update)
-        self.timer.start(1000)  # Timer tick every second
+        self.timer.start(800)  # Timer tick every second
 
     def update_animation(self):
         gif_path = self.get_image_path(self.current_state)
@@ -87,7 +122,9 @@ class CatWindow(QLabel):
         # Movement speed (pixels per update)
         movement_speed = 25
 
-        if self.current_state == IDLE and self.state_duration > 3:  # 5 minutes
+        if self.enable_chase:
+            self.chase_cursor()
+        elif self.current_state == IDLE and self.state_duration > 3:  # 5 minutes
             # If the cat is at the right edge, only allow moving left
             if self.x + self.width() >= 1440:
                 self.current_state = MOVING_POSITIVE
