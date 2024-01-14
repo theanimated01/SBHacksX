@@ -25,8 +25,6 @@ class CatWindow(QLabel):
         self.center_on_screen()
         self.y_pos = 100
         self.movement_speed = 10
-        self.x, self.y = 1300, 720
-        self.move(self.x, self.y)
 
         # Attributes for draggable window
         self.is_dragging = False
@@ -165,4 +163,4 @@ class CatWindow(QLabel):
         self.update_animation()
 
     def move_window(self):
-        self.setGeometry(self.x, self.y, self.width(), self.height())
+        self.setGeometry(self.x, self.y(), self.width(), self.height())
